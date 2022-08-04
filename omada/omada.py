@@ -164,11 +164,9 @@ class Omada:
 		
 		params['_'] = timestamp()
 		params['token'] = self.token
-		# headers = {"Cookie":f"TPEAP_SESSIONID={self.}"}
-
-		response = self.session.get(self.url_for(path), params=params, data=data, json=json )
+		headers = {"Csrf-Token": f"{self.token}"}
+		response = self.session.get(self.url_for(path), headers=headers, params=params, data=data, json=json )
 		response.raise_for_status()
-		
 		json = response.json()
 		if json['errorCode'] == 0:
 			return json['result'] if 'result' in json else None
@@ -210,7 +208,7 @@ class Omada:
 		
 		response = self.session.post( self.url_for(path), params=params, data=data, json=json )
 		response.raise_for_status()
-		
+
 		json = response.json()
 		if json['errorCode'] == 0:
 			self.headers = response.headers
@@ -251,9 +249,6 @@ class Omada:
 		
 		result = self.post( '/login', json={'username':username,'password':password} )
 		self.token = result['token']
-
-
-		# self.omadacId = result["omadacId"]
 		self.currentUser = self.getCurrentUser()
 		return result
 
@@ -267,7 +262,7 @@ class Omada:
 	## Returns the current login status.
 	##
 	def getLoginStatus(self):
-		return self.get( '/loginStatus' )
+		return self.get('/loginStatus' )
 
 	##
 	## Returns the current user information.

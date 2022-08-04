@@ -95,4 +95,4 @@ password = secretpassword
 
 ## Acknowledgements
 
-For my wife, who asked that I turn off the device LEDs at night. :heart:
+Thanks to the author!

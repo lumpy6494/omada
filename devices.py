@@ -68,15 +68,14 @@ def print_device( device ):
 def main():
 	omada = Omada()
 	omada.login()
-	# devices = omada.getSiteDevices()
-	#
-	# if len( devices ):
-	# 	print_header()
-	#
-	# for device in devices:
-	# 	print_device( device )
+	devices = omada.getSiteDevices()
+	if len( devices ):
+		print_header()
 
-	# omada.logout()
+	for device in devices:
+		print_device( device )
+
+	omada.logout()
 
 if __name__ == '__main__':
 	main()
